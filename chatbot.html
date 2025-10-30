@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chat with Gemini — AI Assistant</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#0f1724',
+              accent: '#06b6d4',
+              glass: 'rgba(255,255,255,0.04)'
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="antialiased bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100">
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto p-6 flex items-center justify-between border-b border-slate-700/50">
+      <a href="index.html" class="flex items-center gap-4 hover:opacity-80 transition">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-semibold">Ask Gemini</h1>
+          <p class="text-xs text-slate-400">AI Chat Assistant</p>
+        </div>
+      </a>
+      <nav class="flex items-center gap-4">
+        <a href="index.html" class="text-sm text-slate-300 hover:text-white transition">← Back to Home</a>
+        <div class="text-xs text-slate-400">
+          Mode: <span id="mode-label" class="font-medium text-accent">Live</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Chat Container -->
+    <main class="max-w-5xl mx-auto px-6 py-8">
+      <div class="bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl shadow-2xl backdrop-blur-sm border border-slate-700/50 overflow-hidden">
+        
+        <!-- Chat Header -->
+        <div class="p-6 border-b border-slate-700/50 bg-slate-800/40">
+          <h2 class="text-2xl font-bold">Chat with Gemini AI</h2>
+          <p class="text-sm text-slate-400 mt-1">Ask anything — get instant AI-powered answers</p>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="chat-messages" class="p-6 space-y-4 min-h-[400px] max-h-[500px] overflow-y-auto">
+          <!-- Welcome Message -->
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div class="flex-1 bg-slate-800/60 rounded-lg p-4">
+              <p class="text-slate-200">👋 Hello! I'm Gemini AI. Ask me anything — from explaining concepts to writing code, summarizing text, or creative ideas!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-6 border-t border-slate-700/50 bg-slate-800/40">
+          <form id="chat-form" class="flex gap-3">
+            <textarea 
+              id="prompt" 
+              name="prompt" 
+              rows="1" 
+              required 
+              placeholder="Type your message here..."
+              class="flex-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 p-3 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+              style="min-height: 44px; max-height: 120px;"
+            ></textarea>
+            <button 
+              id="submit" 
+              type="submit"
+              class="px-6 py-3 bg-accent hover:bg-cyan-500 text-slate-900 rounded-lg font-semibold transition shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              Send
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Tips Section -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-4 bg-slate-800/40 rounded-lg border border-slate-700/50">
+          <h4 class="font-semibold text-white mb-2">💡 Pro Tips</h4>
+          <p class="text-sm text-slate-400">Be specific with your questions for better answers</p>
+        </div>
+        <div class="p-4 bg-slate-800/40 rounded-lg border border-slate-700/50">
+          <h4 class="font-semibold text-white mb-2">📝 Examples</h4>
+          <p class="text-sm text-slate-400">"Explain quantum computing" or "Write a Python function"</p>
+        </div>
+        <div class="p-4 bg-slate-800/40 rounded-lg border border-slate-700/50">
+          <h4 class="font-semibold text-white mb-2">⚡ Fast Responses</h4>
+          <p class="text-sm text-slate-400">Get answers in seconds powered by Gemini AI</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="chatbot.js"></script>
+    <script>
+      // Check mode on load
+      fetch('/api/health')
+        .then(r => r.json())
+        .then(data => {
+          const modeLabel = document.getElementById('mode-label');
+          if (data.demo) {
+            modeLabel.textContent = 'Demo';
+            modeLabel.classList.remove('text-accent');
+            modeLabel.classList.add('text-yellow-400');
+          } else {
+            modeLabel.textContent = 'Live';
+          }
+        })
+        .catch(() => {
+          document.getElementById('mode-label').textContent = 'Unknown';
+        });
+    </script>
+  </body>
+</html>
